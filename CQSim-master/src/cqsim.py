@@ -6,10 +6,37 @@ import time
 import re
 import cqsim_path
 import cqsim_main
+import argparse
+from CqSim.Basic_algorithm import *
 
 def datetime_strptime (value, format):
     """Parse a datetime like datetime.strptime in Python >= 2.5"""
     return datetime(*time.strptime(value, format)[0:6])
+
+def parse_swf(file_path):
+    """
+    Function to parse the SWF file and extract workload information.
+    Modify this function as per the structure of your SWF files.
+    """
+    with open(file_path, 'r') as file:
+        # Placeholder: You would process the SWF file contents here
+        workload_data = file.readlines()  # Read file contents
+    return workload_data
+
+def run_scheduling_algorithm(algorithm, workload_data):
+    """
+    Run the selected scheduling algorithm on the provided workload data.
+    """
+    if algorithm == "Gavel":
+        scheduler = GavelScheduling(workload_data)
+    elif algorithm == "FCFS":
+        scheduler = FCFS(workload_data)
+    else:
+        raise ValueError("Unsupported scheduling algorithm.")
+
+    # Simulate the scheduling and get results
+    results = scheduler.schedule()
+    return results
 
 class Option (optparse.Option):
     
