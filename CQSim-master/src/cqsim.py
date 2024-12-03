@@ -186,6 +186,10 @@ if __name__ == "__main__":
     p.add_option("-f", "--frac", dest="cluster_fraction", type="float", \
         #default=1.0, \
         help="job density adjust")
+
+
+    p.add_option("--sched_alg", dest="sched_alg", type="string", \
+        help="scheduling algorithm to run")
         
     # 6
     p.add_option("-s", "--start", dest="start", type="float", \
@@ -431,6 +435,7 @@ if __name__ == "__main__":
     inputPara['monitor']=opts.monitor
     inputPara['log_freq']=opts.log_freq
     inputPara['read_input_freq']=opts.read_input_freq
+    inputPara['sched_alg']=opts.sched_alg
 
     for item in inputPara_name:
         if not inputPara[item]:
@@ -475,4 +480,6 @@ if __name__ == "__main__":
     inputPara['path_fmt']=cqsim_path.path_data+inputPara['path_fmt']
     inputPara['path_debug']=cqsim_path.path_data+inputPara['path_debug']
     inputPara['alg_sign']=alg_sign_check(inputPara['alg_sign'],len(inputPara['alg']))
+
+    assert(inputPara['sched_alg'])
     cqsim_main.cqsim_main(inputPara)

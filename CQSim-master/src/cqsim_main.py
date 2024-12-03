@@ -15,6 +15,8 @@ import Extend.SWF.Filter_job_SWF as filter_job_ext
 import Extend.SWF.Filter_node_SWF as filter_node_ext
 import Extend.SWF.Node_struc_SWF as node_struc_ext
 
+import importlib
+
 
 
 def  cqsim_main(para_list):
@@ -90,7 +92,22 @@ def  cqsim_main(para_list):
     
     # Basic Algorithm
     print(".................... Basic Algorithm")
-    module_alg = Class_Basic_algorithm.Basic_algorithm (element=[para_list['alg'],para_list['alg_sign']],debug=module_debug,para_list=para_list['ad_alg_para'])
+
+    module = importlib.import_module("CqSim.Basic_algorithm")
+    sched_alg_class = getattr(module, para_list['sched_alg'])
+
+    # generic way, assumes that all constructors take the same arguments (works for GavelScheduling, at least)
+    #module_alg = sched_alg_class(element=[para_list['alg'],para_list['alg_sign']],debug=module_debug,para_list=para_list['ad_alg_para'])
+
+    # alternative: case-by-case constructor calls
+    if para_list['sched_alg'] == 'BasicAlgorithm':
+      module_alg = sched_alg_class(element=[para_list['alg'],para_list['alg_sign']],debug=module_debug,para_list=para_list['ad_alg_para'])
+    elif para_list['sched_alg'] == 'GavelScheduling':
+      module_alg = sched_alg_class(element=[para_list['alg'],para_list['alg_sign']],debug=module_debug,para_list=para_list['ad_alg_para'])
+    elif para_list['sched_alg'] == 'FCFS':
+      module_alg = sched_alg_class()
+    else:
+      raise NotImplementedError
     
     # Information Collect
     print(".................... Information Collect")

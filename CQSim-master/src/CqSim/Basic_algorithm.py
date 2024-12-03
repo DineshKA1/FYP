@@ -130,6 +130,8 @@ class GavelScheduling(Basic_algorithm):
 class FCFS(Basic_algorithm):
     def __init__(self):
         self.completed_jobs = []
+        self.myInfo = "FCFS"
+        self.algStr = "0"
         
     def schedule_jobs(self, jobs, currentTime):
         
