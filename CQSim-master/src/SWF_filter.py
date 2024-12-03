@@ -19,7 +19,7 @@ SWF_files[0].append("OSC-Clust-2000-3.1-cln")
 SWF_files[0].append("SDSC-BLUE-2000-4.1-cln")
 SWF_files[0].append("SDSC-Par-1995-3.1-cln")
 SWF_files[0].append("SDSC-Par-1996-3.1-cln")
-SWF_files[0].append("SDSC-SP2-1998-4.1-cln")
+SWF_files[0].append("SDSC-SP2-1998-4.2-cln")
 
 
 SWF_files[1].append("ANL-Intrepid-2009-1")
