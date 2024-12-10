@@ -106,6 +106,20 @@ def  cqsim_main(para_list):
       module_alg = sched_alg_class(element=[para_list['alg'],para_list['alg_sign']],debug=module_debug,para_list=para_list['ad_alg_para'])
     elif para_list['sched_alg'] == 'FCFS':
       module_alg = sched_alg_class()
+    elif para_list['sched_alg'] == 'RoundRobin':
+      time_quantum = para_list.get('time_quantum', 10)  # Default time quantum
+      module_alg = RoundRobin(time_quantum=time_quantum)  
+    elif para_list['sched_alg'] == 'SJF':
+      module_alg = SJF()
+    elif para_list['sched_alg'] == 'SRTF':
+      module_alg = SRTF()
+    elif para_list['sched_alg'] == 'PriorityScheduling':
+      module_alg = PriorityScheduling()
+    elif para_list['sched_alg'] == 'MultilevelFeedbackQueue':
+      queues = para_list.get('queues', [1, 2, 3])  # Default queue levels
+      module_alg = MultilevelFeedbackQueue(queues=queues)
+    elif para_list['sched_alg'] == 'EDF':
+      module_alg = EDF()
     else:
       raise NotImplementedError
     

@@ -116,8 +116,8 @@ def plot_average_turnaround(fcfs_file, gavel_file):
 
 
 #paths to algo log files
-fcfs_file_path = "/Users/dinesh/Documents/GitHub/CQFYP/CQSim-master/src/FCFS.txt"
-gavel_file_path = "/Users/dinesh/Documents/GitHub/CQFYP/CQSim-master/src/Gavel.txt"
+fcfs_file_path = "C:\Users\Dino\Documents\GitHub\CQFYP\CQSim-master\src\FCFS.txt"
+gavel_file_path = "C:\Users\Dino\Documents\GitHub\CQFYP\CQSim-master\src\Gavel.txt"
 
 #generate the Gantt chart for GavelScheduling
 gavel_jobs = parse_gavel_log(gavel_file_path)
