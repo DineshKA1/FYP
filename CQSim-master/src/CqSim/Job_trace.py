@@ -90,7 +90,8 @@ class Job_trace:
                     if (self.temp_start < 0):
                         self.temp_start = self.min_sub
                     self.start_offset_B = self.min_sub-self.temp_start
-                    
+                
+                print(f"debug: min_sub = {self.min_sub}, temp_start = {self.temp_start}, start_offset_B = {self.start_offset_B}")
                 print("length:", len(temp_dataList))
                 
                 tempInfo = {'id':int(temp_dataList[0]),\

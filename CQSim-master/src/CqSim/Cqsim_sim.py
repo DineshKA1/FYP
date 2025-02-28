@@ -192,6 +192,7 @@ class Cqsim_sim:
             if len(self.event_seq) > 0:
                 temp_current_event = self.event_seq[0]
                 temp_currentTime = temp_current_event['time']
+                print("EVENT:", temp_current_event)
             else:
                 temp_current_event = None
                 temp_currentTime = -1
@@ -288,6 +289,7 @@ class Cqsim_sim:
         self.module['node'].node_allocate(self.module['job'].job_info(job_index)['reqProc'], job_index,\
          self.currentTime, self.currentTime + self.module['job'].job_info(job_index)['reqTime'])
         self.module['job'].job_start(job_index, self.currentTime)
+        print("PROC TIME?", self.module['job'].job_info(job_index))
         self.insert_event(1,self.currentTime+self.module['job'].job_info(job_index)['run'],1,[2,job_index])
         return
     

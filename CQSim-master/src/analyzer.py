@@ -92,7 +92,6 @@ fcfs_df['Duration'] = fcfs_df['Completion Time'] - fcfs_df['Submission Time']
 
 fcfs_df = fcfs_df[fcfs_df['Duration'] > 0]  # Ensure no zero or negative durations
 
-
 # Compute additional metrics
 def fairness_index(durations):
     return (sum(durations) ** 2) / (len(durations) * sum([d ** 2 for d in durations]))

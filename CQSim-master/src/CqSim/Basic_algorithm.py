@@ -111,7 +111,7 @@ class GavelScheduling(Basic_algorithm):
             remaining_time = max(1, job['reqProc'])
         
             # Incorporate GPU consideration in the score calculation
-            gpu_weight = 2 if job.get('gpu_required', 0) > 0 else 1  # Example: give higher weight to GPU jobs
+            gpu_weight = 2 if job.get('gpu_required', 0) > 0 else 1  # eg: give higher weight to GPU jobs
             score = (waited_time / (remaining_time + 1)) * gpu_weight  # Adjusted score formula
             self.scoreList.append(score)
 
@@ -486,7 +486,7 @@ class FCFS(Basic_algorithm):
         if not jobs:
             return []
         
-        # Basic FCFS - earlier submission gets higher priority
+        # normal FCFS - earlier submission gets higher priority
         #sorted_jobs = sorted(jobs, key=lambda x: x['submit'])
 
         #ensures GPU jobs are scheduled first while preserving FCFS order
@@ -494,7 +494,7 @@ class FCFS(Basic_algorithm):
 
         
         for i, job in enumerate(sorted_jobs):
-            # Optional: Could add GPU weight here if you want to bias toward GPU jobs
+            #adding GPU weight for bias toward GPU jobs
             #gpu_factor = 2 if job.get('gpu_required', 0) > 0 else 1
             #self.scoreList.append((len(jobs) - i) * gpu_factor)
             
