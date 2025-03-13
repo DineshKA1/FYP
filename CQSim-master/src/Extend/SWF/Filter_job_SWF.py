@@ -60,6 +60,7 @@ class Filter_job_SWF(filter_job.Filter_job):
                     num_part = ""    # 16
                     num_pre = ""    # 17
                     thinkTime = ""    # 18
+                    gpu_required = "" # 19
                     
                     for i in range(strNum):
                         if (tempStr[i] == '\n'):
@@ -106,7 +107,9 @@ class Filter_job_SWF(filter_job.Filter_job):
                                 num_pre = num_pre + tempStr[i] 
                             elif k == 17:
                                 thinkTime = thinkTime + tempStr[i] 
-                            
+                            elif k == 18:
+                                gpu_required = gpu_required + tempStr[i] 
+                           
                     if (min_sub<0):
                         min_sub=float(submit)
                         if (self.start < 0):
@@ -134,6 +137,7 @@ class Filter_job_SWF(filter_job.Filter_job):
                                 'num_part':int(num_part),\
                                 'num_pre':int(num_pre),\
                                 'thinkTime':int(thinkTime),\
+                                'gpu_required':int(gpu_required),\
                                 'start':-1,\
                                 'end':-1,\
                                 'score':0,\
@@ -178,6 +182,8 @@ class Filter_job_SWF(filter_job.Filter_job):
                         f2.write(str(tempInfo['num_pre']))
                         f2.write(sep_sign)
                         f2.write(str(tempInfo['thinkTime']))
+                        f2.write(sep_sign)
+                        f2.write(str(tempInfo['gpu_required']))
                         f2.write("\n")
                         #self.jobList.append(tempInfo)
                         temp_readNum+=1

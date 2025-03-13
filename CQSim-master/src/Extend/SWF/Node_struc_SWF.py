@@ -10,11 +10,30 @@ class Node_struc_SWF(Class_Node_struc.Node_struc):
         
     def node_allocate(self, proc_num, job_index, start, end):
         #self.debug.debug("* "+self.myInfo+" -- node_allocate",5)
+
+        # Prevent negative start times
+        if start < 0:
+            print(f"error: Job {job_index} has an invalid start time: {start}. Resetting to 0.")
+            start = 0  # Reset start time to 0
+
+        # Ensure end time is also valid
+        if end <= start:
+            print(f"error: Job {job_index} has an invalid end time: {end}. Adjusting based on start time.")
+            end = start + abs(proc_num)  # Set a valid end time
+
+        print(f"[DEBUG] Job {job_index} - Start: {start}, End: {end}")
+
         if self.is_available(proc_num) == 0:
             return 0
         self.idle -= proc_num
         self.avail = self.idle
-        temp_job_info = {'job':job_index, 'end': end, 'node': proc_num}
+        #temp_job_info = {'job':job_index, 'end': end, 'node': proc_num}
+        #end = max(start + proc_num, 0)  # Ensure end time is non-negative
+        if end < 0:
+            print(f"[ERROR] Job {job_index} has an invalid end time: {end}. Resetting to start time + proc_num.")
+            end = max(start + abs(proc_num), 0)  # Use absolute value to prevent negative time
+
+        temp_job_info = {'job': job_index, 'end': end, 'node': proc_num}
         j = 0
         is_done = 0
         temp_num = len(self.job_list)
@@ -55,7 +74,15 @@ class Node_struc_SWF(Class_Node_struc.Node_struc):
             j += 1
         self.idle += temp_node
         self.avail = self.idle
-        self.job_list.pop(j)
+        print(f"Attempting to remove job index {j} from job_list with length {len(self.job_list)}")
+        
+        # Ensure the job exists before removing
+        if j < len(self.job_list) and job_index == self.job_list[j]['job']:
+            self.job_list.pop(j)
+        else:
+            print(f"***Job {job_index} already removed, skipping.")
+
+        #self.job_list.pop(j)
         self.debug.debug("  Release"+"["+str(job_index)+"]"+" Req:"+str(temp_node)+" Avail:"+str(self.avail)+" ",4)
         return 1
         
